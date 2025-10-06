@@ -26,7 +26,13 @@ const App: React.FC = () => {
 
   // Adicionar tarefa
   const addTask = async () => {
-    if (!newTask.trim()) return;
+    if (!newTask.trim()){
+      Swal.fire({
+        title: "Please enter a task",
+        icon: "error",
+      })
+      return;
+    };
 
     const res = await api.post("/user", { title: newTask, status: newStatus });
     setTasks([...tasks, res.data]);
@@ -86,7 +92,7 @@ const App: React.FC = () => {
           value={newTask}
           placeholder="Add a task..."
           onChange={(e) => setNewTask(e.target.value)}
-          required
+          
         />
         <select value={newStatus} onChange={(e) => setNewStatus(e.target.value as Task["Status"])}>
           <option value="in-progress">🚧 in-progress</option>
