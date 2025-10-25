@@ -10,7 +10,7 @@ interface Task {
 }
 
 
-const normalizeTask = (data: any): Task => ({
+const normalizeTask = (data: Task): Task => ({
   id: data.id, 
   title: data.title,
   status: data.status,
